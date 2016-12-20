@@ -1,10 +1,59 @@
 import random
 #We start with Hangman
+HANGMANPICS = ['''
+   +---+
+   |   |
+       |
+       |
+       |
+       |
+ =========''', '''
+   +---+
+   |   |
+   0   |
+       |
+       |
+       |
+ =========''', '''
+   +---+
+   |   |
+   0   |
+   |   |
+       |
+       |
+ =========''', '''
+   +---+
+   |   |
+   0   |
+  /|   |
+       |
+       |
+ =========''', '''
+   +---+
+   |   |
+   0   |
+  /|\  |
+       |
+       |
+ =========''', '''
+   +---+
+   |   |
+   0   |
+  /|\  |
+  /    |
+       |
+ =========''', '''
+   +---+
+   |   |
+   0   |
+  /|\  |
+  / \  |
+       |
+ =========''']
+
 text_file = open("words.txt", "r")
 mytuple=text_file.readlines()
-#mytuple=("ant","cat","dog","sheep","spider")
 mylist=[]
-#tuple can't be updated
 print("Starting the Game: ")
 r=random.randint(0,len(mytuple)-1)
 secretWord=mytuple[r]
@@ -15,7 +64,6 @@ for i in range(0,l):
     mylist.append("_ ")
 print(secretWord)
 print(mylist)
-
 while turns>0:
     flag=0
     for char in secretWord :
@@ -38,8 +86,4 @@ while turns>0:
     if turns==0 :
         print("Lose")
 
-#if str in secretWord:
- #   print("Yay")
-#else:
- #   print("Nay")
-#print("done finally")
+
