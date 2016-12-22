@@ -2,3 +2,5 @@ cat
 dog
 mat
 apple
+buzzed
+humming
