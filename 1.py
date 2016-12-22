@@ -51,22 +51,19 @@ HANGMANPICS = ['''
   / \  |
        |
  =========''']
-
-text_file = open("words.txt", "r")
-mytuple=text_file.readlines()
-mylist=[]
+lines = [line.rstrip('\n') for line in open('words.txt')]
 print("Starting the Game, computer chooses secret word.")
 print("You have only 7 turns since this is HANGMAN")
 def getRandomWord(myt):
     r=random.randint(0,len(myt)-1)
     return myt[r]
-
-secretWord=getRandomWord(mytuple)
+mylist=[]
+secretWord=getRandomWord(lines)
 l=len(secretWord)
 turns=len(hang)
 guess=''
 p=0
-for i in range(0,l-1):
+for i in range(0,l):
     mylist.append("_ ")
 print(mylist)
 has={}
@@ -97,8 +94,8 @@ while turns>0:
                 pest=0
                 flag1=secretWord.count(letter)
     if pest==0:
-        flag+=flag1-1      
-    if flag==l-1:
+        flag+=flag1      
+    if flag==l:
       print("You won")
       break
 print("The secret word was",secretWord)
