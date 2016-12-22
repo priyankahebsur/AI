@@ -1,5 +1,6 @@
 import random
 #We start with Hangman
+hang='HANGMAN'
 HANGMANPICS = ['''
    +---+
    |   |
@@ -54,36 +55,54 @@ HANGMANPICS = ['''
 text_file = open("words.txt", "r")
 mytuple=text_file.readlines()
 mylist=[]
-print("Starting the Game: ")
-r=random.randint(0,len(mytuple)-1)
-secretWord=mytuple[r]
+print("Starting the Game, computer chooses secret word.")
+print("You have only 7 turns since this is HANGMAN")
+def getRandomWord(myt):
+    r=random.randint(0,len(myt)-1)
+    return myt[r]
+
+secretWord=getRandomWord(mytuple)
 l=len(secretWord)
-turns=3
+turns=len(hang)
 guess=''
-for i in range(0,l):
+p=0
+for i in range(0,l-1):
     mylist.append("_ ")
-print(secretWord)
 print(mylist)
+has={}
+was={}
+flag1=0
+pest=1
+for char in secretWord:
+    was[char]=secretWord.count(char)
 while turns>0:
     flag=0
-    for char in secretWord :
-        if char in guess :
-                print(char)
-                flag+=1
-        else :
-            print("_")
-           # flag+=1
-    if flag==l:
-      print("You won")
-      break
-    
     letter=input("Guess the letter?" )
+    if secretWord.count(letter)>1:
+        has[letter]=1
     guess+=letter
-    #print(str)
     if letter not in secretWord :
         turns-=1
+        print(HANGMANPICS[7-turns-1])
     print ("Turns left : ",+turns)
     if turns==0 :
         print("Lose")
+    for char in secretWord :
+        if was[char]==1:
+            if char in guess:
+                x=secretWord.count(letter)
+                flag=flag+1
+        elif char in guess and was[char]>1:
+                was[char]=0
+                pest=0
+                flag1=secretWord.count(letter)
+    if pest==0:
+        flag+=flag1-1      
+    if flag==l-1:
+      print("You won")
+      break
+print("The secret word was",secretWord)
+    
+    
 
 
