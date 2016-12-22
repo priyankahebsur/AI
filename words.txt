@@ -1,4 +1,4 @@
 cat
 dog
 mat
-appple
+apple
